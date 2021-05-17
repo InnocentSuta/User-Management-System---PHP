@@ -1,8 +1,12 @@
 <?php
+require_once 'core/init.php';
 
- require_once "includes/head.php";
+if (!is_logged_in()) {
+   header('Location: login.php');
+}
 
- session_start();
+include "includes/head.php";
+
 ?>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -137,7 +141,7 @@
         </a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="/core/logout.php" role="button">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="logout.php" role="button">
         &nbsp;&nbsp;Log out
         </a>
       </li>
