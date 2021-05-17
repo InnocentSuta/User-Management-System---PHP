@@ -140,10 +140,13 @@ include "includes/head.php";
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li> -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="logout.php" role="button">
-        &nbsp;&nbsp;Log out
+      <!-- <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar"  href="logout.php" role="button">
+       Log out
         </a>
+      </li> -->
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="logout.php" class="nav-link">Logout</a>
       </li>
     </ul>
   </nav>
