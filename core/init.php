@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'eglrdc_org_db');
+$db = mysqli_connect('localhost', 'root', '', 'cits_test');
 
 if (mysqli_connect_errno()) {
 
@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
 session_start();
 
 function display_errors($errors){
-  $display = '<ul class = "bg-danger">';
+  $display = '<ul class = "bg-light">';
   foreach ($errors as $error) {
     $display .= '<li class="text-danger">'.$error.'</li>';
   }

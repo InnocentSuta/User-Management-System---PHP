@@ -158,7 +158,7 @@
           <img src="Assets/img/avatar4.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Innocent Suta</a>
+          <a href="#" class="d-block">Hello <?= $user_data['first'] ;?></a>
         </div>
       </div>
 
@@ -202,8 +202,9 @@
               </li>
             </ul> 
           </li> --->
+          <?php if(has_permission('admin')): ?>
           <li class="nav-item">
-            <a href="usersprd.php" class="nav-link">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                Dashboard
@@ -211,16 +212,16 @@
               </p>
             </a>
           </li>
-
+           <?php endif;?>
+          
+           <?php if(has_permission('admin')): ?>
           <li class="nav-item">
-            <a href="users.php" class="nav-link">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>
-               Users
-                <!-- <span class="right badge badge-danger">New</span> -->
-              </p>
-            </a>
-          </li>
+              <p>Users </p> </a>
+              </li>
+                <?php endif;?>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
