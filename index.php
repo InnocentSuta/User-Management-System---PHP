@@ -8,6 +8,15 @@ if (!is_logged_in()) {
 include "includes/head.php";
 include "includes/navigation.php";
 
+$userQuery ="SELECT * FROM users ORDER BY full_name";
+$userResult = $db->query($userQuery);
+if (isset($_GET['featured'])){
+  $id = (int)$_GET['id'];
+  $featured= (int)$_GET['featured'];
+  $featureSql="UPDATE users SET featured = '$featured' WHERE id = '$id'";
+  $db->query( $featureSql);
+  header('Location: index.php');
+}
 ?>
 
  
@@ -18,90 +27,70 @@ include "includes/navigation.php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">USERS LIST</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard </li>
+              <li class="breadcrumb-item active">Users </li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
+    
+  <section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="">
+      <a href="users.php?add=1" class="btn btn-success">Add New User</a>
+        <table class="table table-bordered table-stripped table-condensed">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Join Date</th>
+            <th>Roles</th>
+            <th>Featured</th>
+            <th> Actions</th>
+          </thead>
+          <tbody>
+  <?php
+  while ($user_row = mysqli_fetch_assoc($userResult)):
+     $name = $user_row['full_name'] ;
+     $email = $user_row['email'] ;
+     $join_date = $user_row['join_date'] ;
+     $last_login = $user_row['last_login'] ;
+     $permissions = $user_row['permissions'] ;
+     $featured = $user_row['featured'] ;
+   ?>
+  <tr>
+     <td><?= $name;?></td>
+     <td><?= $email ;?></td>
+     <td><?= pretty_date($join_date) ;?></td>
+     <td><?= $permissions ;?></td>
+     <?php if($user_row['id'] != $user_data['id']): ?>
+     <td><a href="users.php?featured=<?= (($featured == 0)?'1':'0');?>&id=<?= $user_row['id'];?>" class="btn btn-xs btn-default">
+     <span class="glyphicon glyphicon-<?= (($featured == 1)?'minus':'plus'); ?>"></span>
+   </a>&nbsp;<?= (($featured == 1)?'Featured Users':'');?>
+     </td>
+    <?php endif; ?>
+ <td>
+   <?php if($user_row['id'] != $user_data['id']): ?>
+     <a href="users.php?edit=<?= $user_row['id'];?>" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit </a></a>
+     <a href="users.php?delete=<?= $user_row['id'];?>" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i>Delete </a></a>
+   <?php endif; ?>
+  </td>
+  </tr>
+<?php endwhile; ?>
+</tbody>
+</table>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
+</div>
+</div>
+</div>
+</section>
 
-                <p>Total Users</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>Active Users</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-                <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <!-- /.row -->
-        <!-- Main row -->
-        
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
+    
     <!-- /.content -->
   </div>
 
