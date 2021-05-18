@@ -50,7 +50,7 @@ if (isset($_GET['featured'])){
             <th>Email</th>
             <th>Join Date</th>
             <th>Roles</th>
-            <th>Featured</th>
+            <th>Account Status</th>
             <th> Actions</th>
           </thead>
           <tbody>
@@ -71,7 +71,7 @@ if (isset($_GET['featured'])){
      <?php if($user_row['id'] != $user_data['id']): ?>
      <td><a href="users.php?featured=<?= (($featured == 0)?'1':'0');?>&id=<?= $user_row['id'];?>" class="btn btn-xs btn-default">
      <span class="glyphicon glyphicon-<?= (($featured == 1)?'minus':'plus'); ?>"></span>
-   </a>&nbsp;<?= (($featured == 1)?'Featured Users':'');?>
+   </a>&nbsp;<?= (($featured == 1)?'Active Users':'');?>
      </td>
     <?php endif; ?>
  <td>
