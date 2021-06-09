@@ -2,5 +2,5 @@
 This is a simple user management system in PHP.
 
 
-##super admin: sutainnocent@gmail.com
-##pwd: mastervic
+##`super admin:` sutainnocent@gmail.com
+##`Password:` ***** Available upon request
